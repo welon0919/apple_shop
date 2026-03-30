@@ -23,30 +23,40 @@ enum Storage {
 }
 
 enum IphoneModel {
-  iphone17e({Storage.s256: 19200, Storage.s512: 25600}, "assets/iphone17e.png"),
+  iphone17e({
+    Storage.s256: 19200,
+    Storage.s512: 25600,
+  }, "assets/phone_images/iphone17_e.png"),
 
-  iphone17({Storage.s256: 25600, Storage.s512: 32000}, "assets/iphone17.png"),
+  iphone17({
+    Storage.s256: 25600,
+    Storage.s512: 32000,
+  }, "assets/phone_images/iphone17.png"),
 
   iphone17Air({
     Storage.s256: 30000,
     Storage.s512: 38000,
     Storage.s1tb: 45000,
-  }, "assets/iphone17_air.png"),
+  }, "assets/phone_images/iphone17_air.png"),
 
   iphone17Pro({
     Storage.s256: 35000,
     Storage.s512: 41500,
     Storage.s1tb: 48000,
-  }, "assets/iphone17_pro.png"),
+  }, "assets/phone_images/iphone17_pro.png"),
 
   iphone17ProMax({
     Storage.s256: 38500,
     Storage.s512: 45000,
     Storage.s1tb: 51000,
     Storage.s2tb: 64000,
-  }, "assets/iphone17_pro_max.png");
+  }, "assets/phone_images/iphone17_pro_max.png");
 
   const IphoneModel(this.prices, this.imagePath);
+  List<Storage> getStorageOptions() {
+    return prices.keys.toList();
+  }
+
   @override
   String toString() {
     switch (this) {
@@ -81,6 +91,16 @@ class Iphone {
       );
     }
     return price;
+  }
+
+  static List<IphoneModel> getModelOptions() {
+    return [
+      IphoneModel.iphone17,
+      IphoneModel.iphone17Air,
+      IphoneModel.iphone17Pro,
+      IphoneModel.iphone17ProMax,
+      IphoneModel.iphone17e,
+    ];
   }
 
   List<Storage> getStorageOptions() {
