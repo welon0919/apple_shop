@@ -1,6 +1,7 @@
 import 'package:apple_shop_y213_31/model/phone.dart';
 import 'package:apple_shop_y213_31/ui/add_item_btn.dart';
 import 'package:apple_shop_y213_31/ui/add_item_page.dart';
+import 'package:apple_shop_y213_31/ui/checkout_page.dart';
 import 'package:apple_shop_y213_31/ui/selected_phones_display.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +46,25 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  void _handleCheckout() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CheckoutPage(phones: selectedPhones),
+      ),
+    );
+    if (result == true) {
+      setState(() {
+        selectedPhones.clear();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 50, bottom: 10),
+      body: Padding(
+        padding: EdgeInsets.only(top: 50, bottom: 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,48 +87,34 @@ class _MainPageState extends State<MainPage> {
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
+
               child: Row(
                 children: [
-                  /*   Expanded(
-                    child: TextButton(
-                      onPressed: _handleAddItem,
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        "新增商品",
-                        style: TextStyle(
-                          fontSize: Theme.of(
-                            context,
-                          ).textTheme.headlineLarge?.fontSize,
-                        ),
-                      ),
-                    ),
-                  ), */
                   Expanded(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: selectedPhones.isNotEmpty
+                          ? _handleCheckout
+                          : null,
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.zero,
-                        backgroundColor: Colors.green,
+                        backgroundColor: selectedPhones.isNotEmpty
+                            ? Colors.green
+                            : Theme.of(context).disabledColor,
                         foregroundColor: Colors.white,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.zero,
                         ),
                         elevation: 0,
                       ),
-                      child: Text(
-                        "前往結帳",
-                        style: TextStyle(
-                          fontSize: Theme.of(
-                            context,
-                          ).textTheme.headlineLarge?.fontSize,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "前往結帳",
+                          style: TextStyle(
+                            fontSize: Theme.of(
+                              context,
+                            ).textTheme.headlineLarge?.fontSize,
+                          ),
                         ),
                       ),
                     ),
@@ -125,6 +126,7 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: AddItemBtn(handleAddItem: _handleAddItem),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
