@@ -12,6 +12,7 @@ class AddItemPage extends StatefulWidget {
 class _AddItemPageState extends State<AddItemPage> {
   IphoneModel? _selectedModel;
   Storage? _selectedStorage;
+  IphoneColor? _selectedColor;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,35 +38,67 @@ class _AddItemPageState extends State<AddItemPage> {
                     _selectedModel = selected;
                     if (selected != null) {
                       _selectedStorage = selected.getStorageOptions()[0];
+                      debugPrint(selected.getColorOptions().toString());
+                      _selectedColor = selected.getColorOptions()[0];
                     }
                   });
                 },
               ),
               if (_selectedModel != null)
-                DropdownMenu(
+                Column(
+                  spacing: 20,
                   key: ValueKey(_selectedModel),
-
-                  label: const Text("選擇手機容量"),
-                  dropdownMenuEntries: _selectedModel!
-                      .getStorageOptions()
-                      .map(
-                        (storageOption) => DropdownMenuEntry(
-                          value: storageOption,
-                          label: storageOption.toString(),
-                        ),
-                      )
-                      .toList(),
-                  initialSelection: _selectedModel!.getStorageOptions()[0],
-                  onSelected: (selectedStorage) {
-                    setState(() {
-                      _selectedStorage = selectedStorage;
-                    });
-                  },
+                  children: [
+                    DropdownMenu<Storage>(
+                      label: const Text("選擇手機容量"),
+                      dropdownMenuEntries: _selectedModel!
+                          .getStorageOptions()
+                          .map(
+                            (storageOption) => DropdownMenuEntry(
+                              value: storageOption,
+                              label: storageOption.toString(),
+                            ),
+                          )
+                          .toList(),
+                      initialSelection: _selectedModel!.getStorageOptions()[0],
+                      onSelected: (selectedStorage) {
+                        setState(() {
+                          _selectedStorage = selectedStorage;
+                        });
+                      },
+                    ),
+                    DropdownMenu<IphoneColor>(
+                      label: const Text("選擇手機顏色"),
+                      dropdownMenuEntries: _selectedModel!
+                          .getColorOptions()
+                          .map(
+                            (colorOption) => DropdownMenuEntry(
+                              value: colorOption,
+                              label: colorOption.toString(),
+                            ),
+                          )
+                          .toList(),
+                      initialSelection: _selectedModel!.getColorOptions()[0],
+                      onSelected: (selectedColor) {
+                        setState(() {
+                          _selectedColor = selectedColor;
+                        });
+                      },
+                    ),
+                  ],
                 )
               else
                 const SizedBox(),
-              if (_selectedModel != null && _selectedStorage != null)
-                PhoneDisplay(phone: Iphone(_selectedModel!, _selectedStorage!))
+              if (_selectedModel != null &&
+                  _selectedStorage != null &&
+                  _selectedColor != null)
+                PhoneDisplay(
+                  phone: Iphone(
+                    _selectedModel!,
+                    _selectedStorage!,
+                    _selectedColor!,
+                  ),
+                )
               // Text("$_selectedModel, $_selectedStorage")
               else
                 const SizedBox(),
@@ -73,12 +106,15 @@ class _AddItemPageState extends State<AddItemPage> {
           ),
         ),
       ),
-      floatingActionButton: _selectedModel != null && _selectedStorage != null
+      floatingActionButton:
+          _selectedModel != null &&
+              _selectedStorage != null &&
+              _selectedColor != null
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.pop(
                   context,
-                  Iphone(_selectedModel!, _selectedStorage!),
+                  Iphone(_selectedModel!, _selectedStorage!, _selectedColor!),
                 );
               },
               child: const Icon(Icons.done),

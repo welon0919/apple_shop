@@ -65,12 +65,26 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # Phone images
-    - assets/phone_images/iphone17_air.png
-    - assets/phone_images/iphone17_e.png
-    - assets/phone_images/iphone17_pro_max.png
-    - assets/phone_images/iphone17_pro.png
-    - assets/phone_images/iphone17.png
+    - assets/phone_images/iphone17_air_cloud_white.png
+    - assets/phone_images/iphone17_air_light_gold.png
+    - assets/phone_images/iphone17_air_sky_blue.png
+    - assets/phone_images/iphone17_air_space_black.png
+    - assets/phone_images/iphone17_black.png
+    - assets/phone_images/iphone17_blue.png
+    - assets/phone_images/iphone17_e_black.png
+    - assets/phone_images/iphone17_e_pink.png
+    - assets/phone_images/iphone17_e_white.png
+    - assets/phone_images/iphone17_green.png
+    - assets/phone_images/iphone17_pro_max_navy_blue.png
+    - assets/phone_images/iphone17_pro_max_silver.png
+    - assets/phone_images/iphone17_pro_max_space_orange.png
+    - assets/phone_images/iphone17_pro_navy_blue.png
+    - assets/phone_images/iphone17_pro_silver.png
+    - assets/phone_images/iphone17_pro_space_orange.png
+    - assets/phone_images/iphone17_purple.png
+    - assets/phone_images/iphone17_white.png
 
+    # Checkmark
     - assets/checkmark.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -98,21 +112,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icon/icon.png"
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  web:
-    generate: true
-    image_path: "assets/icon/icon.png"
-    background_color: "#hexcode"
-    theme_color: "#hexcode"
-  windows:
-    generate: true
-    image_path: "assets/icon/icon.png"
-    icon_size: 48 # min:48, max:256, default: 48
-  macos:
-    generate: true
-    image_path: "assets/icon/icon.png"
