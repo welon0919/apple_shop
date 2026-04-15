@@ -3,16 +3,24 @@ import 'package:apple_shop_y213_31/ui/phone_display.dart';
 import 'package:flutter/material.dart';
 
 class AddItemPage extends StatefulWidget {
-  const AddItemPage({super.key});
+  final IphoneModel model;
+  const AddItemPage({super.key, required this.model});
 
   @override
   State<AddItemPage> createState() => _AddItemPageState();
 }
 
 class _AddItemPageState extends State<AddItemPage> {
-  IphoneModel? _selectedModel;
-  Storage? _selectedStorage;
-  IphoneColor? _selectedColor;
+  late Storage _selectedStorage;
+  late IphoneColor _selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedStorage = widget.model.getStorageOptions()[0];
+    _selectedColor = widget.model.getColorOptions()[0];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,103 +31,74 @@ class _AddItemPageState extends State<AddItemPage> {
             spacing: 20,
 
             children: [
-              DropdownMenu(
-                label: const Text("選擇手機型號"),
-                dropdownMenuEntries: Iphone.getModelOptions()
-                    .map(
-                      (model) => DropdownMenuEntry(
-                        value: model,
-                        label: model.toString(),
-                      ),
-                    )
-                    .toList(),
-                onSelected: (selected) {
-                  setState(() {
-                    _selectedModel = selected;
-                    if (selected != null) {
-                      _selectedStorage = selected.getStorageOptions()[0];
-                      debugPrint(selected.getColorOptions().toString());
-                      _selectedColor = selected.getColorOptions()[0];
-                    }
-                  });
-                },
-              ),
-              if (_selectedModel != null)
-                Column(
-                  spacing: 20,
-                  key: ValueKey(_selectedModel),
-                  children: [
-                    DropdownMenu<Storage>(
-                      label: const Text("選擇手機容量"),
-                      dropdownMenuEntries: _selectedModel!
-                          .getStorageOptions()
-                          .map(
-                            (storageOption) => DropdownMenuEntry(
-                              value: storageOption,
-                              label: storageOption.toString(),
-                            ),
-                          )
-                          .toList(),
-                      initialSelection: _selectedModel!.getStorageOptions()[0],
-                      onSelected: (selectedStorage) {
-                        setState(() {
-                          _selectedStorage = selectedStorage;
-                        });
-                      },
-                    ),
-                    DropdownMenu<IphoneColor>(
-                      label: const Text("選擇手機顏色"),
-                      dropdownMenuEntries: _selectedModel!
-                          .getColorOptions()
-                          .map(
-                            (colorOption) => DropdownMenuEntry(
-                              value: colorOption,
-                              label: colorOption.toString(),
-                            ),
-                          )
-                          .toList(),
-                      initialSelection: _selectedModel!.getColorOptions()[0],
-                      onSelected: (selectedColor) {
-                        setState(() {
-                          _selectedColor = selectedColor;
-                        });
-                      },
-                    ),
-                  ],
-                )
-              else
-                const SizedBox(),
-              if (_selectedModel != null &&
-                  _selectedStorage != null &&
-                  _selectedColor != null)
-                PhoneDisplay(
-                  phone: Iphone(
-                    _selectedModel!,
-                    _selectedStorage!,
-                    _selectedColor!,
+              Column(
+                spacing: 20,
+                key: ValueKey(widget.model),
+                children: [
+                  Text(
+                    widget.model.toString(),
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
-                )
+                  const SizedBox(height: 20),
+                  DropdownMenu<Storage>(
+                    label: const Text("選擇手機容量"),
+                    dropdownMenuEntries: widget.model
+                        .getStorageOptions()
+                        .map(
+                          (storageOption) => DropdownMenuEntry(
+                            value: storageOption,
+                            label: storageOption.toString(),
+                          ),
+                        )
+                        .toList(),
+                    initialSelection: widget.model.getStorageOptions()[0],
+                    onSelected: (selectedStorage) {
+                      setState(() {
+                        if (selectedStorage != null) {
+                          _selectedStorage = selectedStorage;
+                        }
+                      });
+                    },
+                  ),
+                  DropdownMenu<IphoneColor>(
+                    label: const Text("選擇手機顏色"),
+                    dropdownMenuEntries: widget.model
+                        .getColorOptions()
+                        .map(
+                          (colorOption) => DropdownMenuEntry(
+                            value: colorOption,
+                            label: colorOption.toString(),
+                          ),
+                        )
+                        .toList(),
+                    initialSelection: widget.model.getColorOptions()[0],
+                    onSelected: (selectedColor) {
+                      setState(() {
+                        if (selectedColor != null) {
+                          _selectedColor = selectedColor;
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
+              PhoneDisplay(
+                phone: Iphone(widget.model, _selectedStorage, _selectedColor),
+              ),
               // Text("$_selectedModel, $_selectedStorage")
-              else
-                const SizedBox(),
             ],
           ),
         ),
       ),
-      floatingActionButton:
-          _selectedModel != null &&
-              _selectedStorage != null &&
-              _selectedColor != null
-          ? FloatingActionButton(
-              onPressed: () {
-                Navigator.pop(
-                  context,
-                  Iphone(_selectedModel!, _selectedStorage!, _selectedColor!),
-                );
-              },
-              child: const Icon(Icons.done),
-            )
-          : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(
+            context,
+            Iphone(widget.model, _selectedStorage, _selectedColor),
+          );
+        },
+        child: const Icon(Icons.done),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:apple_shop_y213_31/model/phone.dart';
 import 'package:apple_shop_y213_31/ui/add_item_btn.dart';
 import 'package:apple_shop_y213_31/ui/add_item_page.dart';
+import 'package:apple_shop_y213_31/ui/catalog_page.dart';
 import 'package:apple_shop_y213_31/ui/checkout_page.dart';
 import 'package:apple_shop_y213_31/ui/selected_phones_display.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
@@ -18,7 +19,8 @@ class _MainPageState extends State<MainPage> {
   void _handleAddItem() async {
     final selectedPhone = await Navigator.push<Iphone>(
       context,
-      MaterialPageRoute(builder: (context) => AddItemPage()),
+      // MaterialPageRoute(builder: (context) => AddItemPage()),
+      MaterialPageRoute(builder: (context) => CatalogPage()),
     );
     if (!mounted) return;
     if (selectedPhone != null) {

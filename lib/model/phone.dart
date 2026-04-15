@@ -51,6 +51,8 @@ enum IphoneModel {
       IphoneColor.white: "assets/phone_images/iphone17_e_white.png",
       IphoneColor.black: "assets/phone_images/iphone17_e_black.png",
     },
+
+    "assets/catalog/iphone17_e.png",
   ),
 
   iphone17(
@@ -62,6 +64,8 @@ enum IphoneModel {
       IphoneColor.white: "assets/phone_images/iphone17_white.png",
       IphoneColor.black: "assets/phone_images/iphone17_black.png",
     },
+
+    "assets/catalog/iphone17.png",
   ),
 
   iphone17Air(
@@ -74,6 +78,7 @@ enum IphoneModel {
       IphoneColor.spaceBlack:
           "assets/phone_images/iphone17_air_space_black.png",
     },
+    "assets/catalog/iphone17_air.png",
   ),
 
   iphone17Pro(
@@ -84,6 +89,8 @@ enum IphoneModel {
       IphoneColor.navyBlue: "assets/phone_images/iphone17_pro_navy_blue.png",
       IphoneColor.silver: "assets/phone_images/iphone17_pro_silver.png",
     },
+
+    "assets/catalog/iphone17_pro.png",
   ),
 
   iphone17ProMax(
@@ -100,12 +107,14 @@ enum IphoneModel {
           "assets/phone_images/iphone17_pro_max_navy_blue.png",
       IphoneColor.silver: "assets/phone_images/iphone17_pro_max_silver.png",
     },
+    "assets/catalog/iphone17_pro_max.png",
   );
 
-  const IphoneModel(this.prices, this.colorImages);
+  const IphoneModel(this.prices, this.colorImages, this.catalogImage);
 
   final Map<IphoneColor, String> colorImages;
   final Map<Storage, int> prices;
+  final String catalogImage;
 
   List<Storage> getStorageOptions() {
     return prices.keys.toList();

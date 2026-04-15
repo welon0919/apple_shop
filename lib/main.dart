@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Iphone17 Shop",
       home: const Scaffold(body: MainPage()),
-      routes: {addItemPageRoute: (context) => AddItemPage()},
     );
   }
 }

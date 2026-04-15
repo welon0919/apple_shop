@@ -84,6 +84,13 @@ flutter:
     - assets/phone_images/iphone17_purple.png
     - assets/phone_images/iphone17_white.png
 
+    # Catalog images
+    - assets/catalog/iphone17_e.png
+    - assets/catalog/iphone17.png
+    - assets/catalog/iphone17_pro_max.png
+    - assets/catalog/iphone17_pro.png
+    - assets/catalog/iphone17_air.png
+
     # Checkmark
     - assets/checkmark.gif
 
