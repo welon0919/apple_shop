@@ -19,7 +19,7 @@ class SelectedPhonesDisplay extends StatelessWidget {
     if (_selectedPhones.isEmpty) {
       return Center(
         child: Text(
-          "尚未選擇任何手機！",
+          "尚未選擇任何商品！",
           style: TextStyle(
             fontSize: Theme.of(context).textTheme.headlineLarge?.fontSize,
           ),

@@ -1,6 +1,5 @@
 import 'package:apple_shop_y213_31/model/phone.dart';
 import 'package:apple_shop_y213_31/ui/add_item_btn.dart';
-import 'package:apple_shop_y213_31/ui/add_item_page.dart';
 import 'package:apple_shop_y213_31/ui/catalog_page.dart';
 import 'package:apple_shop_y213_31/ui/checkout_page.dart';
 import 'package:apple_shop_y213_31/ui/selected_phones_display.dart';

@@ -20,7 +20,7 @@ class CatalogPage extends StatelessWidget {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 int crossAxisCount = constraints.maxWidth ~/ width;
-                final allIphones = IphoneModel.values;
+                final allIphones = Model.values;
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount > 0 ? crossAxisCount : 1,
@@ -59,7 +59,7 @@ class CatalogPage extends StatelessWidget {
     );
   }
 
-  void _handleSelectItem(BuildContext context, IphoneModel model) async {
+  void _handleSelectItem(BuildContext context, Model model) async {
     final selectedPhone = await Navigator.push<Iphone>(
       context,
       // MaterialPageRoute(builder: (context) => AddItemPage()),

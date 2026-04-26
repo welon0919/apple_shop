@@ -3,7 +3,7 @@ import 'package:apple_shop_y213_31/ui/phone_display.dart';
 import 'package:flutter/material.dart';
 
 class AddItemPage extends StatefulWidget {
-  final IphoneModel model;
+  final Model model;
   const AddItemPage({super.key, required this.model});
 
   @override
@@ -41,7 +41,7 @@ class _AddItemPageState extends State<AddItemPage> {
                   ),
                   const SizedBox(height: 20),
                   DropdownMenu<Storage>(
-                    label: const Text("選擇手機容量"),
+                    label: const Text("選擇容量"),
                     dropdownMenuEntries: widget.model
                         .getStorageOptions()
                         .map(

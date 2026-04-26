@@ -5,13 +5,19 @@ enum IphoneColor {
   skyBlue("天藍色"),
   lightGold("淺金色"),
   cloudWhite("雲白色"),
-  spaceBlack("宇宙黑色"),
+  spaceBlack("太空黑色"),
+  spaceGray("太空灰色"),
   pink("嫩粉色"),
   white("白色"),
   black("黑色"),
   purple("薰衣草紫色"),
   green("鼠尾草綠色"),
-  blue("霧藍色");
+  blue("霧藍色"),
+  ipadBlue("藍色"),
+  ipadPink("粉紅色"),
+  ipadYelllow("黃色"),
+  ipadPurple("紫色"),
+  starLight("星光色");
 
   const IphoneColor(this.label);
   final String label;
@@ -20,15 +26,20 @@ enum IphoneColor {
 }
 
 enum Storage {
+  s128(128),
   s256(256),
   s512(512),
   s1tb(1024),
-  s2tb(2048);
+  s2tb(2048),
+  pro1tb(1024),
+  pro2tb(2048);
 
   const Storage(this.size);
   @override
   String toString() {
     switch (this) {
+      case Storage.s128:
+        return "128GB";
       case Storage.s256:
         return "256GB";
       case Storage.s512:
@@ -37,13 +48,18 @@ enum Storage {
         return "1TB";
       case Storage.s2tb:
         return "2TB";
+
+      case Storage.pro1tb:
+        return "1TB (16GB Ram)";
+      case Storage.pro2tb:
+        return "2TB (16GB Ram)";
     }
   }
 
   final int size;
 }
 
-enum IphoneModel {
+enum Model {
   iphone17e(
     {Storage.s256: 19200, Storage.s512: 25600},
     {
@@ -108,9 +124,92 @@ enum IphoneModel {
       IphoneColor.silver: "assets/phone_images/iphone17_pro_max_silver.png",
     },
     "assets/catalog/iphone17_pro_max.png",
+  ),
+
+  ipad11(
+    {Storage.s128: 10900, Storage.s256: 14400, Storage.s512: 21400},
+    {
+      IphoneColor.ipadBlue: "assets/ipad_images/ipad_11th_a16_blue.png",
+      IphoneColor.ipadPink: "assets/ipad_images/ipad_11th_a16_pink.png",
+      IphoneColor.ipadYelllow: "assets/ipad_images/ipad_11th_a16_yellow.png",
+      IphoneColor.silver: "assets/ipad_images/ipad_11th_a16_silver.png",
+    },
+    "assets/catalog/ipad_11.png",
+  ),
+  ipadMini7(
+    {Storage.s128: 16900, Storage.s256: 20400, Storage.s512: 27400},
+    {
+      IphoneColor.spaceGray:
+          "assets/ipad_images/ipad_mini_a17_pro_space_gray.png",
+      IphoneColor.ipadBlue: "assets/ipad_images/ipad_mini_a17_pro_blue.png",
+      IphoneColor.ipadPurple: "assets/ipad_images/ipad_mini_a17_pro_purple.png",
+      IphoneColor.starLight:
+          "assets/ipad_images/ipad_mini_a17_pro_starlight.png",
+    },
+    "assets/catalog/ipad_mini_7.png",
+  ),
+  ipadPro11Inch(
+    {
+      Storage.s256: 32900,
+      Storage.s512: 39900,
+      Storage.pro1tb: 53900,
+      Storage.pro2tb: 67900,
+    },
+    {
+      IphoneColor.spaceBlack:
+          "assets/ipad_images/ipad_pro_11_m5_space_black.png",
+
+      IphoneColor.silver: "assets/ipad_images/ipad_pro_11_m5_silver.png",
+    },
+    "assets/catalog/ipad_pro_11_inch.png",
+  ),
+  ipadPro13Inch(
+    {
+      Storage.s256: 43900,
+      Storage.s512: 50900,
+      Storage.pro1tb: 64900,
+      Storage.pro2tb: 78900,
+    },
+    {
+      IphoneColor.spaceBlack:
+          "assets/ipad_images/ipad_pro_13_m5_space_black.png",
+
+      IphoneColor.silver: "assets/ipad_images/ipad_pro_13_m5_silver.png",
+    },
+    "assets/catalog/ipad_pro_13_inch.png",
+  ),
+  ipadAir11Inch(
+    {
+      Storage.s128: 19900,
+      Storage.s256: 23400,
+      Storage.s512: 30400,
+      Storage.s1tb: 37400,
+    },
+    {
+      IphoneColor.spaceGray: "assets/ipad_images/ipad_air_11_m4_spacegray.png",
+      IphoneColor.ipadBlue: "assets/ipad_images/ipad_air_11_m4_blue.png",
+      IphoneColor.ipadPurple: "assets/ipad_images/ipad_air_11_m4_purple.png",
+      IphoneColor.starLight: "assets/ipad_images/ipad_air_11_m4_starlight.png",
+    },
+    "assets/catalog/ipad_air_11_inch.png",
+  ),
+  ipadAir13Inch(
+    {
+      Storage.s128: 26900,
+      Storage.s256: 30400,
+      Storage.s512: 37400,
+      Storage.s1tb: 44400,
+    },
+    {
+      IphoneColor.spaceGray: "assets/ipad_images/ipad_air_13_m4_spacegray.png",
+      IphoneColor.ipadBlue: "assets/ipad_images/ipad_air_13_m4_blue.png",
+      IphoneColor.ipadPurple: "assets/ipad_images/ipad_air_13_m4_purple.png",
+      IphoneColor.starLight: "assets/ipad_images/ipad_air_13_m4_starlight.png",
+    },
+    "assets/catalog/ipad_air_13_inch.png",
   );
 
-  const IphoneModel(this.prices, this.colorImages, this.catalogImage);
+  const Model(this.prices, this.colorImages, this.catalogImage);
 
   final Map<IphoneColor, String> colorImages;
   final Map<Storage, int> prices;
@@ -127,22 +226,35 @@ enum IphoneModel {
   @override
   String toString() {
     switch (this) {
-      case IphoneModel.iphone17e:
+      case Model.iphone17e:
         return "Iphone 17e";
-      case IphoneModel.iphone17:
+      case Model.iphone17:
         return "Iphone 17";
-      case IphoneModel.iphone17Air:
+      case Model.iphone17Air:
         return "Iphone 17 Air";
-      case IphoneModel.iphone17Pro:
+      case Model.iphone17Pro:
         return "Iphone 17 Pro";
-      case IphoneModel.iphone17ProMax:
+      case Model.iphone17ProMax:
         return "Iphone 17 Pro Max";
+
+      case Model.ipad11:
+        return "Ipad 11 (A16)";
+      case Model.ipadMini7:
+        return "Ipad mini 7 (A17 Pro)";
+      case Model.ipadPro11Inch:
+        return "IPad Pro 11吋 (M5)";
+      case Model.ipadPro13Inch:
+        return "IPad Pro 13吋 (M5)";
+      case Model.ipadAir11Inch:
+        return "IPad Air 11吋 (M4)";
+      case Model.ipadAir13Inch:
+        return "IPad Air 13吋 (M4)";
     }
   }
 }
 
 class Iphone {
-  final IphoneModel model;
+  final Model model;
   final IphoneColor color;
   final Storage storage;
 
@@ -158,13 +270,13 @@ class Iphone {
     return price;
   }
 
-  static List<IphoneModel> getModelOptions() {
+  static List<Model> getModelOptions() {
     return [
-      IphoneModel.iphone17,
-      IphoneModel.iphone17Air,
-      IphoneModel.iphone17Pro,
-      IphoneModel.iphone17ProMax,
-      IphoneModel.iphone17e,
+      Model.iphone17,
+      Model.iphone17Air,
+      Model.iphone17Pro,
+      Model.iphone17ProMax,
+      Model.iphone17e,
     ];
   }
 
