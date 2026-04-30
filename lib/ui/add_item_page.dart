@@ -61,7 +61,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     },
                   ),
                   DropdownMenu<IphoneColor>(
-                    label: const Text("選擇手機顏色"),
+                    label: const Text("選擇顏色"),
                     dropdownMenuEntries: widget.model
                         .getColorOptions()
                         .map(
