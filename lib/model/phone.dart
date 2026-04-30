@@ -186,7 +186,7 @@ enum Model {
       Storage.s1tb: 37400,
     },
     {
-      IphoneColor.spaceGray: "assets/ipad_images/ipad_air_11_m4_spacegray.png",
+      IphoneColor.spaceGray: "assets/ipad_images/ipad_air_11_m4_space_gray.png",
       IphoneColor.ipadBlue: "assets/ipad_images/ipad_air_11_m4_blue.png",
       IphoneColor.ipadPurple: "assets/ipad_images/ipad_air_11_m4_purple.png",
       IphoneColor.starLight: "assets/ipad_images/ipad_air_11_m4_starlight.png",
